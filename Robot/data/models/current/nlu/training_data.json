@@ -2,6 +2,10 @@
   "rasa_nlu_data": {
     "common_examples": [
       {
+        "text": "stock", 
+        "intent": "search_stock"
+      }, 
+      {
         "entities": [
           {
             "start": 23, 
@@ -88,6 +92,58 @@
       {
         "entities": [
           {
+            "start": 8, 
+            "end": 14, 
+            "value": "Google", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 23, 
+            "end": 28, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Tell me Google's share price"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 16, 
+            "end": 25, 
+            "value": "Microsoft", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 28, 
+            "end": 34, 
+            "value": "volume", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Tell me what is Microsoft's volume"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 13, 
+            "end": 22, 
+            "value": "Pinduoduo", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Help me find Pinduoduo's stock information"
+      }, 
+      {
+        "text": "[Apple]'s stock price?", 
+        "intent": "search_stock"
+      }, 
+      {
+        "entities": [
+          {
             "start": 0, 
             "end": 5, 
             "value": "price", 
@@ -96,6 +152,10 @@
         ], 
         "intent": "search_stock", 
         "text": "price"
+      }, 
+      {
+        "text": "news", 
+        "intent": "search_news"
       }, 
       {
         "entities": [
@@ -170,6 +230,18 @@
         "text": "The news about Airbus"
       }, 
       {
+        "text": "Market", 
+        "intent": "search_market"
+      }, 
+      {
+        "text": "Does the market get strong?", 
+        "intent": "search_market"
+      }, 
+      {
+        "text": "What is the market index?", 
+        "intent": "search_market"
+      }, 
+      {
         "text": "I want to know something about the market.", 
         "intent": "search_market"
       }, 
@@ -200,6 +272,34 @@
         ], 
         "intent": "search_market", 
         "text": "How about China market?"
+      }, 
+      {
+        "text": "Can you tell me a joke?", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "Give me a joke", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "Make me laugh", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "joke", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "Get jokes", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "What can you search", 
+        "intent": "help"
+      }, 
+      {
+        "text": "You are", 
+        "intent": "help"
       }, 
       {
         "text": "What can you do for me", 
@@ -242,11 +342,11 @@
         "intent": "greet"
       }, 
       {
-        "text": "Hello my friend!", 
+        "text": "Are you there?", 
         "intent": "greet"
       }, 
       {
-        "text": "How are you?", 
+        "text": "In?", 
         "intent": "greet"
       }, 
       {
@@ -266,6 +366,14 @@
         "intent": "goodbye"
       }, 
       {
+        "text": "88", 
+        "intent": "goodbye"
+      }, 
+      {
+        "text": "Stop talking", 
+        "intent": "goodbye"
+      }, 
+      {
         "text": "yes", 
         "intent": "mood_affirm"
       }, 
@@ -282,8 +390,16 @@
         "intent": "mood_affirm"
       }, 
       {
+        "text": "right", 
+        "intent": "mood_affirm"
+      }, 
+      {
         "text": "correct", 
         "intent": "mood_affirm"
+      }, 
+      {
+        "text": "don't", 
+        "intent": "mood_deny"
       }, 
       {
         "text": "no", 

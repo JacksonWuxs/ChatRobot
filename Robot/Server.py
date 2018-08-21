@@ -1,19 +1,19 @@
 from SocketServer import ThreadingTCPServer, BaseRequestHandler
 from rasa_nlu.model import Interpreter
-from rasa_robot import Robot
+from scripts.rasa_robot import Robot
 from warnings import filterwarnings
 from time import sleep
 
 filterwarnings('ignore')
 HOST, PORT = "localhost", 8877
-MODEL_ADDR = './models/current/nlu'
+MODEL_ADDR = './data/models/current/nlu'
 INTERPRETER = Interpreter.load(MODEL_ADDR)
 
 class MyTCPHandler(BaseRequestHandler):
     def handle(self):
         robot = Robot(self.request, INTERPRETER)
         while True:
-            sleep(1)
+            sleep(0.5)
             self.request.sendall('SESSIONSTOP')
             if not robot.session():
                 break

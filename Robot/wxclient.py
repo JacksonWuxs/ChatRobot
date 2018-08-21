@@ -1,38 +1,44 @@
-from wxpy import *
-from client import Client
-from time import localtime
+# -*- coding: utf-8 -*-
+import itchat
+from itchat.content import *
+from scripts.client import Client
+from scripts.translater import translate, check_language
 from Queue import Queue
 
 PORT, HOST = 8877, 'localhost'
+CHINESE, ENGLISH = 1, 2
+Pipes, Clients = {}, {}
 
 class WxClient(Client):
     def __init__(self, **kward):
         Client.__init__(self, **kward)
         self._user = kward['User']
         self._queue = kward['Queue']
-        
+        self._language = kward['Language']
+
     def callback(self, receive):
-        '''Rewrite this function for different API
-        '''
-        self._user.send(receive)
+        if check_language != self._language:
+            receive = translate(receive).encode('utf-8')
+        itchat.send_msg(receive.decode('utf-8'), toUserName=self._user)
 
     def call(self):
-        return text
+        return self._queue.get()
 
-Pipes = {}
-bot = Bot(cache_path=True)
-bot.file_helper.send(str(localtime()))
-
-@bot.register(except_self=False)
+@itchat.msg_register(TEXT)
 def reply_my_friend(msg):
-    name = msg.nickname
-    print '%s : %s' % (name, msg.text)
-    if name not in clients:
+    name, message = msg['FromUserName'], translate(msg['Text'])
+
+    if (name not in Pipes) or not Clients[name].is_alive():
         q = Queue(1)
         Pipes[name] = q
-        client = WxClient(HOST=HOST, PORT=PORT, User=name, Queue=q)
-        client.start()
-    Pipes[name].put(msg.text)
-    return
+        c = WxClient(HOST=HOST, PORT=PORT, Language=check_language(message),
+                 User=name, Queue=q)
+        c.start()
+        Clients[name] = c
 
-embed(shell='python')
+    if check_language(message) != ENGLISH:
+        message = translate(message)
+    Pipes[name].put(message)
+    
+itchat.auto_login(hotReload=True)
+itchat.run()
