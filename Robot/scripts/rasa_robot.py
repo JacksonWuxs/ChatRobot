@@ -57,13 +57,11 @@ class Robot:
             elif stock and not subject:
                 subject = self.ask('Which information you want to know about %s, price, news or others?' % stock.upper(), False)
             elif not stock and subject:
-                stock = self.ask("You want to know the %s of which company?" % subject, False)
+                stock = self.ask("Do you want to know which company's %s" % subject, False)
             else:
-                self.response("Sorry, I didn't hear clear.")
-                stock = self.ask('So, which company you want to know about?', False)
-                subject = self.ask('And, what you want to know about %s' % stock, False)
-
-            if subject in (u'news', 'new', 'info', 'information'):
+                stock = self.ask("Sorry, I didn't hear clear, which company you want to know about?", False)
+                subject = self.ask('And, what you want to know about %s, news, price or volume?' % stock, False)
+            if subject in ('news', 'new', 'info', 'information', 'Journalism'):
                 self.do_news(news=None, i=0, key=stock)
             else:
                 self.do_stock(stock, subject)
@@ -71,20 +69,21 @@ class Robot:
         elif intent['intent'] == u'search_news':
             key = intent.get('key', None)
             while not key:
-                key = self.ask("I didn't hear clearly, please tell me again what you want to know?", False)
+                key = self.ask("Sorry, please repeat the keyword of the news.", False)
             self.do_news(news=None, i=0, key=key)
-
+            
         elif intent['intent'] == u'search_market':
             self.do_market(intent.get('country', None))
-
+            
         elif intent['intent'] in (u'search_joke', u'mood_deny', u'mood_unhappy'):
             self.do_jokes()
-
+            
         elif intent['intent'] == u'help':
            self.response(choice(RESPONSE_HELP))
-
+           
         else:
             self.response(choice(RESPONSE_NOTHING))
+            
         return True
             
     def listen(self, parse=True):
@@ -114,7 +113,7 @@ class Robot:
             for ent in parse[u'entities']:
                 if ent.get(u'entity') == 'country':
                     obj['country'] = ent[u'value'].encode('utf-8')
-
+        print obj['intent']
         return obj
 
     def response(self, msg):
@@ -130,7 +129,6 @@ class Robot:
         '''Get more information from the client in one session.
         '''
         self.response(msg)
-        sleep(0.5)
         self.response('INPUT')
         return self.listen(parse)
     
@@ -170,11 +168,11 @@ class Robot:
                 self.response('The %s price of %s is $%s per share.' % (subject.encode('utf-8'), stock, stock_[subject]))
         
         elif subject == 'volume':
-            stock = self.get_stock(stock)
-            if stock is None:
+            stock_ = self.get_stock(stock)
+            if stock_ is None:
                 self.response('Failed to get the %s price with unclear reasons.' % subject)
             else:
-                self.response('The volume of %s is %d.' % stock['volume'])
+                self.response('The volume of %s is %s.' % (stock, stock_['volume']))
     
         else:
             self.response("I didn't hear clearly, please ask me again.")
@@ -183,17 +181,15 @@ class Robot:
         if not news:
             news = self.get_news(key)
             
-        try:
-            self.response(news[i].Title)
-        except IndexError:
-            self.response('Sorry, I can not collect the news about this, please try another keyword.')
-            return
-                  
+        self.response(news[i].Title)
+
         intent = self.ask(choice(RESPONSE_CHOOSE))['intent']
         if intent in (u'mood_deny', u'mood_unhappy'):
             self.do_news(news, i+1)
         if intent in (u'mood_affirm', u'mood_great'):
             self.response("News' link is %s" % news[i].Link)
+        else:
+            self.response('Maybe we can change another keyword?')
 
     def do_jokes(self, jokes=None):
         if not jokes:
@@ -204,7 +200,9 @@ class Robot:
         if intent in (u'mood_deny', u'mood_unhappy'):
             self.do_jokes(jokes)
         if intent in (u'mood_affirm', u'mood_great'):
-            self.response(random(RESPONSE_FINISH_JOKE))
+            self.response(choice(RESPONSE_FINISH_JOKE))
+        else:
+            self.response('What else I can help you?')
 
     def get_jokes(self):
         text = get(JOKE_ADDR).text
@@ -216,8 +214,9 @@ class Robot:
         text = get(NEWS_ADDR % subject).text
         soup = BeautifulSoup(text, 'html.parser')
         infos = soup.findAll(attrs={'class': 'r-info r-info2'})
-        return [NEWS_FORMAT(subject, info.a.string.encode('utf-8'), info.a['href']) for info in infos if info.a.string is not None]
-        
+        return [NEWS_FORMAT(subject, info.a.string, info.a['href']) for info in infos if info.a.string is not None]
+
+            
     def get_stock(self, stock):
         stock_ID, market = self.get_stock_info(stock)
         try:

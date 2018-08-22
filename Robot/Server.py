@@ -14,8 +14,12 @@ class MyTCPHandler(BaseRequestHandler):
         robot = Robot(self.request, INTERPRETER)
         while True:
             self.request.sendall('SESSIONSTOP')
-            if not robot.session():
-                break
+            try:
+                if not robot.session():
+                    self.request.sendall('STOPRUNNING')
+                    break
+            except:
+                self.request.sendall('There is something mistakes happended.')
 
 if __name__ == "__main__":
     server = ThreadingTCPServer((HOST, PORT), MyTCPHandler)

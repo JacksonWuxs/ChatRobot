@@ -19,9 +19,9 @@ class Client(Thread):
         receive = self.listen()
         try:
             while self._running:
-                if receive.endswith('INPUT') or receive == 'SESSIONSTOP':
+                if GET_INFO:
                     self.say()
-                receive = self.listen()
+                GET_INFO = self.listen()
                 
         except Exception, e:
             print('Something wrong as %s' % e)
@@ -35,16 +35,22 @@ class Client(Thread):
 
     def listen(self):
         receive = self._conn.recv(1024).strip()
-        if receive == '':
+        if 'STOPRUNNING' in receive:
             self._running = False
+            return False
             
-        elif receive == 'SESSIONSTOP':
-            print
+        elif 'SESSIONSTOP' in receive:
+            receive.replace('SESSIONSTOP', '')
+            print()
+            return False
             
-        elif not receive.endswith('INPUT'):
+        elif 'INPUT' in receive:
+            receive.replace('INPUT', '')
+            return False
+            
+        else:
             self.callback(receive)
-
-        return receive
+            return True
 
     def callback(self, receive):
         '''Rewrite this function for different API
