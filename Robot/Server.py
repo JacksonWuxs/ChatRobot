@@ -13,7 +13,6 @@ class MyTCPHandler(BaseRequestHandler):
     def handle(self):
         robot = Robot(self.request, INTERPRETER)
         while True:
-            sleep(0.5)
             self.request.sendall('SESSIONSTOP')
             if not robot.session():
                 break

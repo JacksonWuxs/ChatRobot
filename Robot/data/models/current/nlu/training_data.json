@@ -2,8 +2,70 @@
   "rasa_nlu_data": {
     "common_examples": [
       {
-        "text": "stock", 
-        "intent": "search_stock"
+        "entities": [
+          {
+            "start": 0, 
+            "end": 5, 
+            "value": "Apple", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 12, 
+            "end": 17, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Apple stock price"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 0, 
+            "end": 7, 
+            "value": "Vanke A", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 14, 
+            "end": 19, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Vanke A share price"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 4, 
+            "end": 9, 
+            "value": "price", 
+            "entity": "subject"
+          }, 
+          {
+            "start": 13, 
+            "end": 19, 
+            "value": "Google", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "The price of Google stock today"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 6, 
+            "end": 11, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Stock price information"
       }, 
       {
         "entities": [
@@ -93,6 +155,24 @@
         "entities": [
           {
             "start": 8, 
+            "end": 13, 
+            "value": "Baidu", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 22, 
+            "end": 27, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Give me Baidu's share price"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 8, 
             "end": 14, 
             "value": "Google", 
             "entity": "stock"
@@ -156,6 +236,26 @@
       {
         "text": "news", 
         "intent": "search_news"
+      }, 
+      {
+        "text": "check the news", 
+        "intent": "search_news"
+      }, 
+      {
+        "text": "journalism", 
+        "intent": "search_news"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 0, 
+            "end": 5, 
+            "value": "Baidu", 
+            "entity": "key"
+          }
+        ], 
+        "intent": "search_news", 
+        "text": "Baidu news"
       }, 
       {
         "entities": [
@@ -234,6 +334,10 @@
         "intent": "search_market"
       }, 
       {
+        "text": "Market quotations", 
+        "intent": "search_market"
+      }, 
+      {
         "text": "Does the market get strong?", 
         "intent": "search_market"
       }, 
@@ -274,7 +378,11 @@
         "text": "How about China market?"
       }, 
       {
-        "text": "Can you tell me a joke?", 
+        "text": "tell me a joke", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "Say a joke", 
         "intent": "search_joke"
       }, 
       {
@@ -294,11 +402,15 @@
         "intent": "search_joke"
       }, 
       {
-        "text": "What can you search", 
+        "text": "Can you tell jokes?", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "What can you search for", 
         "intent": "help"
       }, 
       {
-        "text": "You are", 
+        "text": "You are ?", 
         "intent": "help"
       }, 
       {
@@ -315,6 +427,10 @@
       }, 
       {
         "text": "Can you help me", 
+        "intent": "help"
+      }, 
+      {
+        "text": "Help", 
         "intent": "help"
       }, 
       {
@@ -346,7 +462,7 @@
         "intent": "greet"
       }, 
       {
-        "text": "In?", 
+        "text": "At?", 
         "intent": "greet"
       }, 
       {
@@ -458,6 +574,10 @@
         "intent": "mood_great"
       }, 
       {
+        "text": "I like it", 
+        "intent": "mood_great"
+      }, 
+      {
         "text": "sad", 
         "intent": "mood_unhappy"
       }, 
@@ -495,6 +615,14 @@
       }, 
       {
         "text": "so sad", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "I am unhappy", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "I feel terrible today", 
         "intent": "mood_unhappy"
       }
     ], 

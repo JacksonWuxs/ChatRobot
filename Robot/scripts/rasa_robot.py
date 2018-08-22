@@ -1,3 +1,4 @@
+# coding: utf-8
 from rasa_nlu.model import Interpreter
 from random import choice, random
 from time import localtime, sleep
@@ -18,14 +19,14 @@ NEWS_FORMAT = namedtuple('news', ['Keyword', 'Title', 'Link'])
 RESPONSE_GREET = ['Hello, my friend!', 'Good to see you!', 'What can I do for you, sir?', 'Nice to meet you.']
 RESPONSE_THANKYOU = ['That is my honor to service you.', 'You are so kind.', 'You are welcome!']
 RESPONSE_GOODBYE = ['See you!', 'See you next time!', 'I will always be here.', '88']
-RESPONSE_HELP = ['I am a robot created by Jackson Woo. Maybe he is a little busy, so I am here for you now!',
+RESPONSE_HELP = ['I am a robot created by JACKSON WOO, and maybe he is a little busy, so I am here for you now!',
                  'I can help you find out the latest information about the stock market, such as news, price!']
 RESPONSE_CHOOSE = ['Do you like it?', 'Do you interest it?', 'Is that interesting?', 'How about this?', 'This one is better.']
 RESPONSE_NOTHING = ["I have heard you, but I can't understand what you said.", "Sorry, I did not get your point ...",
-                    'Sorry, I only can say some jokes or get some informations for you ...']
+                    'Sorry, I only can say some jokes or get some news for you ...']
 RESPONSE_FINISH_JOKE = ['Jackson Woo must be so happy to see your smile!',
                         'You such a gentle in your smile on your face and this can light of the whole world!',
-                        "Your smiling is truly sweet! It must be the reason for you are one of Jackson's friend!"]
+                        "Your smiling is truly sweet, it must be the reason for you are one of Jackson's friend!"]
 
 class Robot:
     
@@ -40,24 +41,14 @@ class Robot:
         intent = self.listen()
         if intent['intent'] == u'greet':
             self.response(choice(RESPONSE_GREET))
-            if random() <= 0.5:
-                intent = self.ask('Do you want to listen a joke?')['intent']
-                if intent in (u'mood_affirm', u'mood_great'):
-                    self.do_jokes()
-                else:
-                    self.response('OK, what else I can do for you?')
 
         elif intent['intent'] == u'thankyou':
             self.response(choice(RESPONSE_THANKYOU))
             return False
 
         elif intent['intent'] == u'goodbye':
-            intent = self.ask("Please don't leave so quick :( How about talking a joke?")['intent']
-            if intent in (u'mood_affirm', u'mood_great'):
-                self.do_jokes()
-            else:
-                self.response(choice(RESPONSE_GOODBYE))
-                return False
+            self.response(choice(RESPONSE_GOODBYE))
+            return False
 
         elif intent['intent'] == u'search_stock':
             stock, subject = intent.get('stock', None), intent.get('subject', None)
@@ -66,10 +57,10 @@ class Robot:
             elif stock and not subject:
                 subject = self.ask('Which information you want to know about %s, price, news or others?' % stock.upper(), False)
             elif not stock and subject:
-                stock = self.ask("You want to know the %s for which company?" % subject, False)
+                stock = self.ask("You want to know the %s of which company?" % subject, False)
             else:
                 self.response("Sorry, I didn't hear clear.")
-                stock = self.ask('So, which company you want to know?', False)
+                stock = self.ask('So, which company you want to know about?', False)
                 subject = self.ask('And, what you want to know about %s' % stock, False)
 
             if subject in (u'news', 'new', 'info', 'information'):
@@ -86,7 +77,7 @@ class Robot:
         elif intent['intent'] == u'search_market':
             self.do_market(intent.get('country', None))
 
-        elif intent['intent'] == u'search_joke':
+        elif intent['intent'] in (u'search_joke', u'mood_deny', u'mood_unhappy'):
             self.do_jokes()
 
         elif intent['intent'] == u'help':
@@ -99,8 +90,8 @@ class Robot:
     def listen(self, parse=True):
         '''Get the information from the client and parse the result
         '''
-        ID, MSG = self._conn.recv(1024).strip().decode('utf-8').split(':')
-        print '%s say: %s' % (ID, MSG)
+        MSG = self._conn.recv(1024).strip().decode('utf-8')
+        print 'Say: %s' % MSG
 
         if not parse:
             return MSG
@@ -131,9 +122,9 @@ class Robot:
         '''
         if isinstance(msg, list):
             msg = '\n'.join([every.encode('utf-8') for every in msg if every])
-        msg = 'BOT: %s\n' % msg
+        msg = msg.encode('utf-8')
         print msg
-        self._conn.sendall(msg)
+        self._conn.sendall(msg + '\n')
 
     def ask(self, msg, parse=True):
         '''Get more information from the client in one session.
@@ -147,7 +138,7 @@ class Robot:
         if market is None:
             market = self.ask('Which market do you prefer, US or China?', False).upper()
             self.do_market(market)
-        elif market in ('US', 'U.S', 'U.S.', 'AMERICAN', 'UNITED STATES', 'THE UNITED STATES'):
+        elif market in ('US', 'U.S', 'U.S.', 'U.S.A', 'AMERICAN', 'UNITED STATES', 'THE UNITED STATES'):
             _nas = self.get_stock('nasdaq')
             _sp = self.get_stock('biaopu')
             _djz = self.get_stock('djz')
@@ -155,7 +146,7 @@ class Robot:
         elif market in ('CHINA', 'CHINESE', 'CHIAN'):
             _shanghai = self.get_stock('shanghai')
             _shenzheng = self.get_stock('shenzheng')
-            self.response('Shanghai Composite Index: %s | Shenzhen Stock Index: %s' % (_shanghai, _shenzheng))
+            self.response('Shanghai Composite Index: %s  |  Shenzhen Stock Index: %s' % (_shanghai, _shenzheng))
         else:
             self.response('Sorry, we can not support %s market now.' % market)
             
@@ -172,11 +163,11 @@ class Robot:
             self.do_stock(stock, subject[:-5].strip())
 
         elif subject in ('open', 'current', 'high', 'low'):
-            stock = self.get_stock(stock)
-            if stock is None:
+            stock_ = self.get_stock(stock)
+            if stock_ is None:
                 self.response('Failed to get the %s price with unclear reasons.' % subject)
             else:
-                self.response('The %s price of %s is $%s per share.' % (subject.encode('utf-8'), stock['Name'], stock[subject]))
+                self.response('The %s price of %s is $%s per share.' % (subject.encode('utf-8'), stock, stock_[subject]))
         
         elif subject == 'volume':
             stock = self.get_stock(stock)
@@ -186,7 +177,7 @@ class Robot:
                 self.response('The volume of %s is %d.' % stock['volume'])
     
         else:
-            self.response("Maybe I didn't hear clearly, please ask me again.")
+            self.response("I didn't hear clearly, please ask me again.")
 
     def do_news(self, news=None, i=0, key=None):
         if not news:
@@ -213,7 +204,7 @@ class Robot:
         if intent in (u'mood_deny', u'mood_unhappy'):
             self.do_jokes(jokes)
         if intent in (u'mood_affirm', u'mood_great'):
-            self.response()
+            self.response(random(RESPONSE_FINISH_JOKE))
 
     def get_jokes(self):
         text = get(JOKE_ADDR).text
@@ -229,7 +220,10 @@ class Robot:
         
     def get_stock(self, stock):
         stock_ID, market = self.get_stock_info(stock)
-        data = get(STOCK_ADDR % (market, stock_ID)).text.encode('cp936').split('"')[1].split(',')
+        try:
+            data = get(STOCK_ADDR % (market, stock_ID)).text.encode('cp936').split('"')[1].split(',')
+        except:
+            return None
         try:
             if market in ('sh', 'sz'):
                 data = {'Name': data[0],
@@ -263,7 +257,8 @@ class Robot:
             cur = conn.cursor()
             cur.execute('SELECT * FROM stocks WHERE Name="%s"' % stock.lower())
             data = cur.fetchone()
+
         if data is not None:
             return data[0][1:].lower(), data[2]
-        self.response("Sorry, I didn't get the information from my database.")
+        self.response("Sorry, I didn't have the number for this stock.")
         return '', ''

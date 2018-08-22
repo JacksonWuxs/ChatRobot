@@ -22,17 +22,16 @@ class Client(Thread):
                 if receive.endswith('INPUT') or receive == 'SESSIONSTOP':
                     self.say()
                 receive = self.listen()
-##                
-##        except Exception, e:
-##            print('Something wrong as %s' % e)
+                
+        except Exception, e:
+            print('Something wrong as %s' % e)
             
         finally:
             self._conn.close()
                 
     def say(self):
         data = self.call()
-        mail = '{}:{}\n'.format(ID, data)
-        self._conn.sendall(mail)
+        self._conn.sendall(data)
 
     def listen(self):
         receive = self._conn.recv(1024).strip()
