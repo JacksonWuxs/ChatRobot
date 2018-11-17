@@ -121,9 +121,7 @@ class Robot:
         '''
         if isinstance(msg, list):
             msg = '\n'.join([every.encode('utf-8') for every in msg if every])
-        msg = msg.encode('utf-8')
-        print msg
-        self._conn.sendall(msg + '\n')
+        self._conn.sendall(msg.encode('utf-8') + '\n')
 
     def ask(self, msg, parse=True):
         '''Get more information from the client in one session.

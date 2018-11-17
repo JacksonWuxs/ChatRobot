@@ -1,0 +1,632 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "entities": [
+          {
+            "start": 0, 
+            "end": 5, 
+            "value": "Apple", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 12, 
+            "end": 17, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Apple stock price"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 0, 
+            "end": 7, 
+            "value": "Vanke A", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 14, 
+            "end": 19, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Vanke A share price"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 4, 
+            "end": 9, 
+            "value": "price", 
+            "entity": "subject"
+          }, 
+          {
+            "start": 13, 
+            "end": 19, 
+            "value": "Google", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "The price of Google stock today"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 6, 
+            "end": 11, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Stock price information"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 23, 
+            "end": 30, 
+            "value": "Tencent", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Show me the data about Tencent"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 12, 
+            "end": 25, 
+            "value": "current price", 
+            "entity": "subject"
+          }, 
+          {
+            "start": 29, 
+            "end": 34, 
+            "value": "Apple", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "What is the current price of Apple"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 16, 
+            "end": 23, 
+            "value": "Alibaba", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "How much is the Alibaba today?"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 14, 
+            "end": 20, 
+            "value": "volume", 
+            "entity": "subject"
+          }, 
+          {
+            "start": 24, 
+            "end": 31, 
+            "value": "Alibaba", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "How about the volume of Alibaba"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 12, 
+            "end": 21, 
+            "value": "Microsoft", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "How much is Microsoft"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 23, 
+            "end": 29, 
+            "value": "Google", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Give me the data about Google"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 8, 
+            "end": 13, 
+            "value": "Baidu", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 22, 
+            "end": 27, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Give me Baidu's share price"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 8, 
+            "end": 14, 
+            "value": "Google", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 23, 
+            "end": 28, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Tell me Google's share price"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 16, 
+            "end": 25, 
+            "value": "Microsoft", 
+            "entity": "stock"
+          }, 
+          {
+            "start": 28, 
+            "end": 34, 
+            "value": "volume", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Tell me what is Microsoft's volume"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 13, 
+            "end": 22, 
+            "value": "Pinduoduo", 
+            "entity": "stock"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "Help me find Pinduoduo's stock information"
+      }, 
+      {
+        "text": "[Apple]'s stock price?", 
+        "intent": "search_stock"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 0, 
+            "end": 5, 
+            "value": "price", 
+            "entity": "subject"
+          }
+        ], 
+        "intent": "search_stock", 
+        "text": "price"
+      }, 
+      {
+        "text": "news", 
+        "intent": "search_news"
+      }, 
+      {
+        "text": "check the news", 
+        "intent": "search_news"
+      }, 
+      {
+        "text": "journalism", 
+        "intent": "search_news"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 0, 
+            "end": 5, 
+            "value": "Baidu", 
+            "entity": "key"
+          }
+        ], 
+        "intent": "search_news", 
+        "text": "Baidu news"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 16, 
+            "end": 20, 
+            "value": "Dell", 
+            "entity": "key"
+          }
+        ], 
+        "intent": "search_news", 
+        "text": "I'm looking for Dell"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 11, 
+            "end": 17, 
+            "value": "Huawei", 
+            "entity": "key"
+          }
+        ], 
+        "intent": "search_news", 
+        "text": "Search for Huawei"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 23, 
+            "end": 27, 
+            "value": "Oppo", 
+            "entity": "key"
+          }
+        ], 
+        "intent": "search_news", 
+        "text": "What is the news about Oppo"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 24, 
+            "end": 30, 
+            "value": "Xiaomi", 
+            "entity": "key"
+          }
+        ], 
+        "intent": "search_news", 
+        "text": "Tell me something about Xiaomi"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 31, 
+            "end": 37, 
+            "value": "Boeing", 
+            "entity": "key"
+          }
+        ], 
+        "intent": "search_news", 
+        "text": "I want to know something about Boeing"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 15, 
+            "end": 21, 
+            "value": "Airbus", 
+            "entity": "key"
+          }
+        ], 
+        "intent": "search_news", 
+        "text": "The news about Airbus"
+      }, 
+      {
+        "text": "Market", 
+        "intent": "search_market"
+      }, 
+      {
+        "text": "Market quotations", 
+        "intent": "search_market"
+      }, 
+      {
+        "text": "Does the market get strong?", 
+        "intent": "search_market"
+      }, 
+      {
+        "text": "What is the market index?", 
+        "intent": "search_market"
+      }, 
+      {
+        "text": "I want to know something about the market.", 
+        "intent": "search_market"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 11, 
+            "end": 13, 
+            "value": "US", 
+            "entity": "country"
+          }
+        ], 
+        "intent": "search_market", 
+        "text": "How is the US market performance today?"
+      }, 
+      {
+        "text": "How is the market today?", 
+        "intent": "search_market"
+      }, 
+      {
+        "entities": [
+          {
+            "start": 10, 
+            "end": 15, 
+            "value": "China", 
+            "entity": "counrty"
+          }
+        ], 
+        "intent": "search_market", 
+        "text": "How about China market?"
+      }, 
+      {
+        "text": "tell me a joke", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "Say a joke", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "Give me a joke", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "Make me laugh", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "joke", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "Get jokes", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "Can you tell jokes?", 
+        "intent": "search_joke"
+      }, 
+      {
+        "text": "What can you search for", 
+        "intent": "help"
+      }, 
+      {
+        "text": "You are ?", 
+        "intent": "help"
+      }, 
+      {
+        "text": "What can you do for me", 
+        "intent": "help"
+      }, 
+      {
+        "text": "who are you?", 
+        "intent": "help"
+      }, 
+      {
+        "text": "What can you do", 
+        "intent": "help"
+      }, 
+      {
+        "text": "Can you help me", 
+        "intent": "help"
+      }, 
+      {
+        "text": "Help", 
+        "intent": "help"
+      }, 
+      {
+        "text": "hey", 
+        "intent": "greet"
+      }, 
+      {
+        "text": "hello", 
+        "intent": "greet"
+      }, 
+      {
+        "text": "hi", 
+        "intent": "greet"
+      }, 
+      {
+        "text": "good morning", 
+        "intent": "greet"
+      }, 
+      {
+        "text": "good evening", 
+        "intent": "greet"
+      }, 
+      {
+        "text": "hey there", 
+        "intent": "greet"
+      }, 
+      {
+        "text": "Are you there?", 
+        "intent": "greet"
+      }, 
+      {
+        "text": "At?", 
+        "intent": "greet"
+      }, 
+      {
+        "text": "bye", 
+        "intent": "goodbye"
+      }, 
+      {
+        "text": "goodbye", 
+        "intent": "goodbye"
+      }, 
+      {
+        "text": "see you around", 
+        "intent": "goodbye"
+      }, 
+      {
+        "text": "see you later", 
+        "intent": "goodbye"
+      }, 
+      {
+        "text": "88", 
+        "intent": "goodbye"
+      }, 
+      {
+        "text": "Stop talking", 
+        "intent": "goodbye"
+      }, 
+      {
+        "text": "yes", 
+        "intent": "mood_affirm"
+      }, 
+      {
+        "text": "indeed", 
+        "intent": "mood_affirm"
+      }, 
+      {
+        "text": "of course", 
+        "intent": "mood_affirm"
+      }, 
+      {
+        "text": "that sounds good", 
+        "intent": "mood_affirm"
+      }, 
+      {
+        "text": "right", 
+        "intent": "mood_affirm"
+      }, 
+      {
+        "text": "correct", 
+        "intent": "mood_affirm"
+      }, 
+      {
+        "text": "don't", 
+        "intent": "mood_deny"
+      }, 
+      {
+        "text": "no", 
+        "intent": "mood_deny"
+      }, 
+      {
+        "text": "never", 
+        "intent": "mood_deny"
+      }, 
+      {
+        "text": "I don't think so", 
+        "intent": "mood_deny"
+      }, 
+      {
+        "text": "don't like that", 
+        "intent": "mood_deny"
+      }, 
+      {
+        "text": "no way", 
+        "intent": "mood_deny"
+      }, 
+      {
+        "text": "not really", 
+        "intent": "mood_deny"
+      }, 
+      {
+        "text": "perfect", 
+        "intent": "mood_great"
+      }, 
+      {
+        "text": "very good", 
+        "intent": "mood_great"
+      }, 
+      {
+        "text": "great", 
+        "intent": "mood_great"
+      }, 
+      {
+        "text": "amazing", 
+        "intent": "mood_great"
+      }, 
+      {
+        "text": "wonderful", 
+        "intent": "mood_great"
+      }, 
+      {
+        "text": "I am feeling very good", 
+        "intent": "mood_great"
+      }, 
+      {
+        "text": "I am great", 
+        "intent": "mood_great"
+      }, 
+      {
+        "text": "I'm good", 
+        "intent": "mood_great"
+      }, 
+      {
+        "text": "I like it", 
+        "intent": "mood_great"
+      }, 
+      {
+        "text": "sad", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "very sad", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "unhappy", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "bad", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "very bad", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "awful", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "terrible", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "not very good", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "extremly sad", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "so sad", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "I am unhappy", 
+        "intent": "mood_unhappy"
+      }, 
+      {
+        "text": "I feel terrible today", 
+        "intent": "mood_unhappy"
+      }
+    ], 
+    "entity_synonyms": [], 
+    "regex_features": []
+  }
+}
