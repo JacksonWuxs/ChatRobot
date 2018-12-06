@@ -10,6 +10,7 @@ filterwarnings('ignore')
 if version_info < (3, 0):
     MODEL_ADDR = './data2/models/current/nlu'
 else:
+    from rasa_core.interpreter import RasaNLUInterpreter
     MODEL_ADDR = './data3/models/current/nlu'
     Interpreter = RasaNLUInterpreter('./models/nlu/default/weathernlu')
 INTERPRETER = Interpreter.load(MODEL_ADDR)
@@ -26,7 +27,7 @@ class MyTCPHandler(BaseRequestHandler):
                     del robot
                     break
             except:
-                self.request.sendall('There is something mistakes happended.')
+                self.request.sendall('There is some mistakes happended.')
 
 if __name__ == "__main__":
     server = ThreadingTCPServer((HOST, PORT), MyTCPHandler)

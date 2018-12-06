@@ -113,7 +113,6 @@ class Robot:
             for ent in parse[u'entities']:
                 if ent.get(u'entity') == 'country':
                     obj['country'] = ent[u'value'].encode('utf-8')
-        print obj['intent']
         return obj
 
     def response(self, msg):
@@ -173,7 +172,7 @@ class Robot:
                 self.response('The volume of %s is %s.' % (stock, stock_['volume']))
     
         else:
-            self.response("I didn't hear clearly, please ask me again.")
+            self.response("I didn't hear clearly, what do you want to ask me to do?.")
 
     def do_news(self, news=None, i=0, key=None):
         if not news:
@@ -219,9 +218,6 @@ class Robot:
         stock_ID, market = self.get_stock_info(stock)
         try:
             data = get(STOCK_ADDR % (market, stock_ID)).text.encode('cp936').split('"')[1].split(',')
-        except:
-            return None
-        try:
             if market in ('sh', 'sz'):
                 data = {'Name': data[0],
                         'open': data[1],
@@ -250,12 +246,11 @@ class Robot:
             return None
 
     def get_stock_info(self, stock):
-        with sql.connect('data/STOCK_NUM.db') as conn:
+        with sql.connect('data2/STOCK_NUM.db') as conn:
             cur = conn.cursor()
             cur.execute('SELECT * FROM stocks WHERE Name="%s"' % stock.lower())
             data = cur.fetchone()
-
         if data is not None:
             return data[0][1:].lower(), data[2]
-        self.response("Sorry, I didn't have the number for this stock.")
+        self.response("Sorry, I don't have the number for this stock.")
         return '', ''
